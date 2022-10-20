@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class InputDelegateBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private PlayerControls _playerControls;
+    private PlayerMovementBehavior _playerMovement;
+
+    private void Awake()
     {
-        
+        _playerControls = new PlayerControls();
+        _playerMovement = GetComponent<PlayerMovementBehavior>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        _playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _playerControls.Disable();
+    }
+
+    private void FixedUpdate()
+    {
+        Vector2 moveDirection = _playerControls.Player.Movement.ReadValue<Vector2>();
+        _playerMovement.Move(moveDirection);
     }
 }
