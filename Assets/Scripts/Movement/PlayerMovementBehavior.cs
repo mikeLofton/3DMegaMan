@@ -7,7 +7,9 @@ public class PlayerMovementBehavior : MonoBehaviour
     private Rigidbody _rigidbody;
     private Vector3 _velocity;
     [SerializeField]
-    private float _moveSpeed = 1;
+    private float _moveSpeed = 0;
+    private float _movementXPosition;
+    private float _movementZPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +19,7 @@ public class PlayerMovementBehavior : MonoBehaviour
 
     public void Move(Vector3 direction)
     {
+        direction = new Vector3(_movementXPosition, 0, _movementZPosition);
         _velocity = direction * _moveSpeed * Time.deltaTime;
     }
 
